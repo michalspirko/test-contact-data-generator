@@ -1,0 +1,64 @@
+***************************************************
+User Manual: Contact Data Generator and Storage
+***************************************************
+
+Overview
+
+This program generates fake contact data and writes it to a specified destination. It currently supports writing to
+a CSV file, MySQL database, or PostgreSQL database. The number of contacts, output type, and probabilities of
+generating specific pieces of data are all configurable.
+
+***************************************************
+
+Prerequisites
+
+Python 3.7 or above
+Required Python libraries: faker, mysql.connector, psycopg2
+Access to a MySQL or PostgreSQL database (if writing to a database)
+
+***************************************************
+
+Configuration
+
+The program's behavior is configured through an INI-style configuration file, which must have the following sections:
+
+[main]: Contains the main configuration options.
+
+db_type: Specifies the output destination. Valid values are 'csv', 'mysql', and 'postgresql'.
+number_of_contacts: The number of contacts to generate.
+
+[probabilities]: Specifies the probabilities of generating optional pieces of contact data. Expected format is a series
+of key-value pairs separated by commas, like key1=value1,key2=value2,....
+
+[database] (optional): Contains database connection parameters. This section is required when db_type is
+either 'mysql' or 'postgresql'. The parameters include:
+
+host: The database server host.
+port: The port number to use when connecting to the database server.
+user: The username to use for authenticating with the database.
+password: The password to use for authenticating with the database.
+database: The name of the database to use.
+
+***************************************************
+
+Running the Program
+
+Make sure you have installed the necessary Python libraries. You can install them with pip:
+pip install faker mysql-connector-python psycopg2
+
+Prepare your configuration file based on the format described above.
+
+Run the program from the command line with your configuration file as the argument:
+python main.py /path/to/your/config.ini
+
+***************************************************
+
+Output
+
+The program will generate contact data based on the provided configuration and write it to the specified output
+destination. If the output destination is a CSV file, the program will create the file in the current directory
+and print the name of the file to the console. If the output destination is a database, the program will create
+a new table in the database and insert the generated data into that table, then print the name of the created
+table to the console.
+
+***************************************************
